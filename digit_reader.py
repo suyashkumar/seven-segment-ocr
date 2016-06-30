@@ -13,14 +13,15 @@ mapping = {
     "1011111": 6,
     "1011011": 6,
     "0101100": 7,
+    "1101100": 7,
     "1111111": 8,
     "1101110": 9,
-    "1101111": 9,     
+    "1101111": 9,
     "1111101": 0
 }
 
 def cropImage(image, roi):
-    print roi
+    #print roi
     clone = image.copy()
     retImg = clone[roi[0][1]:roi[1][1], roi[0][0]:roi[1][0]]
     return retImg
@@ -74,7 +75,14 @@ def resolve_digit(croppedImage):
     L2Arr = [int(x) for x in L2[0]]
     L3Arr = [int(x) for x in L3]
 
+    #cv2.imshow("orig",croppedImage)
     processString = getProcessStringHoriz(L1Arr)+getProcessStringHoriz(L2Arr)+getProcessStringVert(L3Arr)
+    digit = mapping.get(processString)
+    if (digit is None):
+        print "Digit not recognized: " + processString
+        cv2.imshow("orig", croppedImage)
+        cv2.waitKey(0)
+    #cv2.waitKey(0)
     if (dev):
         print processString
         print mapping[processString]
@@ -83,7 +91,7 @@ def resolve_digit(croppedImage):
         cv2.imshow("L2", L2)
         cv2.imshow("L3",L3)
         cv2.imshow("orig",croppedImage)
-
+        """
         plt.figure(1)
         plt.subplot(311)
         plt.plot(L1Arr)
@@ -95,8 +103,9 @@ def resolve_digit(croppedImage):
         plt.plot(L3Arr)
         plt.title("L3")
         plt.show()
+        """
         cv2.waitKey(0)
-    return mapping[processString]
+    return digit
 
 def read_digits(image, roiPoints):
     digits = []
@@ -106,6 +115,5 @@ def read_digits(image, roiPoints):
         currentSel = cropImage(currentSel, [roiPoints[selection*2], roiPoints[2*selection+1]])
         digit=resolve_digit(currentSel)
         digits.append(digit)
-        print digit
     print digits
     return digits
