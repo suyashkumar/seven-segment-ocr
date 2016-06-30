@@ -1,9 +1,17 @@
+
 import cv2
-import matplotlib.pyplot as plt
 import os
-
+import time
+import warnings
+# Read Environment Vars
 dev = int(os.environ['DEV'])
+demo = int(os.environ['DEMO'])
+if (not dev):
+    warnings.filterwarnings("ignore")
 
+import matplotlib.pyplot as plt
+
+# Number Mapping:
 mapping = {
     "0101000": 1,
     "0110111": 2,
@@ -116,5 +124,8 @@ def read_digits(image, roiPoints):
         currentSel = cropImage(currentSel, [roiPoints[selection*2], roiPoints[2*selection+1]])
         digit=resolve_digit(currentSel)
         digits.append(digit)
-    print digits
+        if (demo):
+            cv2.imshow("demo",currentSel)
+            print digit
+            cv2.waitKey(0)
     return digits

@@ -28,11 +28,18 @@ def read_video_digits(videoPath, samplePeriod):
     video.release()
     return digitMatrix
 
+def to_csv(digitsReadArray, outputFileName):
+    with open(outputFileName,'w') as f:
+        for sample in digitsReadArray:
+            f.write(str(sample[0])+"."+str(sample[1])+str(sample[2]))
+            f.write("\n")
+
 
 if __name__=="__main__":
     # Set up argument parsing:
     parser = argparse.ArgumentParser()
     parser.add_argument('--video', help = "Input Video File")
+    parser.add_argument('--output', help = "Output data file", default="out.csv")
     args = parser.parse_args()
-    print args
-    print read_video_digits(args.video, 1)
+    digitsReadArray = read_video_digits(args.video, 1)
+    to_csv(digitsReadArray, args.output)
