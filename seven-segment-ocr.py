@@ -1,3 +1,9 @@
+"""
+seven-segment-ocr.py
+Extracts numbers from a video of a seven segment display and
+saves them to an output file.
+@author: Suyash Kumar <suyashkumar2003@gmail.com>
+"""
 import argparse
 import cv2
 import image_selection
@@ -33,6 +39,11 @@ def to_csv(digitsReadArray, outputFileName):
         for sample in digitsReadArray:
             f.write(str(sample[0])+"."+str(sample[1])+str(sample[2]))
             f.write("\n")
+def to_file(digitsReadArray, outputFileName):
+    with open(outputFileName,'w') as f:
+        for sample in digitsReadArray:
+            f.write(str(sample[0])+str(sample[1])+str(sample[2]))
+            f.write("\n")
 
 
 if __name__=="__main__":
@@ -40,6 +51,12 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--video', help = "Input Video File")
     parser.add_argument('--output', help = "Output data file", default="out.csv")
+    parser.add_argument('--config', help = "How to format the digit output file.", default="none")
     args = parser.parse_args()
     digitsReadArray = read_video_digits(args.video, 1)
-    to_csv(digitsReadArray, args.output)
+    if (args.video == "drok"):
+        # Output digit data in the A.BC drok power meter configuration
+        to_csv(digitsReadArray, args.output)
+    else:
+        # Output digit data to file
+        to_file(digitsReadArray, args.output)

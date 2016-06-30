@@ -1,4 +1,9 @@
-
+"""
+digit_reader.py
+Module to extract and read seven-segment display digits from an
+ROI in an image.
+@author: Suyash Kumar <suyashkumar2003@gmail.com>
+"""
 import cv2
 import os
 import time

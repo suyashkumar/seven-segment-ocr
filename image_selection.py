@@ -1,4 +1,5 @@
 """
+image_selection.py
 This module gives the user an image to specify selections
 in and returns those selections
 @author: Suyash Kumar <suyashkumar2003@gmail.com>
