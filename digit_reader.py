@@ -81,6 +81,7 @@ def resolve_digit(croppedImage):
     if (digit is None):
         print "Digit not recognized: " + processString
         cv2.imshow("orig", croppedImage)
+        digit = input("What digit is this? Enter here: ")
         cv2.waitKey(0)
     #cv2.waitKey(0)
     if (dev):
