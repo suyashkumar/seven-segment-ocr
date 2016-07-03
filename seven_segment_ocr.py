@@ -42,7 +42,8 @@ def to_csv(digitsReadArray, outputFileName):
 def to_file(digitsReadArray, outputFileName):
     with open(outputFileName,'w') as f:
         for sample in digitsReadArray:
-            f.write(str(sample[0])+str(sample[1])+str(sample[2]))
+            for digit in sample:
+                f.write(str(digit))
             f.write("\n")
 
 

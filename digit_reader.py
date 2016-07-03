@@ -58,7 +58,7 @@ def getProcessStringVert(arr):
     return str(firstQuarter)+str(middleHalf)+str(lastQuarter)
 
 
-def check_high(arraySlice, threshold=100, N=10):
+def check_high(arraySlice, N=8, threshold=100):
     arraySlice = arraySlice[5:]
     numInRow = 0
     maxInRow = 0
@@ -117,7 +117,7 @@ def resolve_digit(croppedImage):
         plt.plot(L3Arr)
         plt.title("L3")
         plt.show()
-    
+
         cv2.waitKey(0)
     return digit
 
