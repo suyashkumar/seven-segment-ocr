@@ -105,7 +105,7 @@ def resolve_digit(croppedImage):
         cv2.imshow("L2", L2)
         cv2.imshow("L3",L3)
         cv2.imshow("orig",croppedImage)
-        """
+
         plt.figure(1)
         plt.subplot(311)
         plt.plot(L1Arr)
@@ -117,7 +117,7 @@ def resolve_digit(croppedImage):
         plt.plot(L3Arr)
         plt.title("L3")
         plt.show()
-        """
+    
         cv2.waitKey(0)
     return digit
 
