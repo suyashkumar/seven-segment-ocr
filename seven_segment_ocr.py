@@ -53,9 +53,11 @@ if __name__=="__main__":
     parser.add_argument('--video', help = "Input Video File")
     parser.add_argument('--output', help = "Output data file", default="out.csv")
     parser.add_argument('--config', help = "How to format the digit output file.", default="none")
+    parser.add_argument('--period', help = "Period (in seconds) to sample the video at", default=1)
+
     args = parser.parse_args()
-    digitsReadArray = read_video_digits(args.video, 1)
-    if (args.video == "drok"):
+    digitsReadArray = read_video_digits(args.video, args.period)
+    if (args.config == "drok"):
         # Output digit data in the A.BC drok power meter configuration
         to_csv(digitsReadArray, args.output)
     else:
