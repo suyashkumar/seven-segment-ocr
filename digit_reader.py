@@ -8,13 +8,22 @@ import cv2
 import os
 import time
 import warnings
-# Read Environment Vars
-dev = int(os.environ['DEV'])
-demo = int(os.environ['DEMO'])
-if (not dev):
-    warnings.filterwarnings("ignore")
-
+warnings.filterwarnings("ignore") # Filter matplotlib warnings
 import matplotlib.pyplot as plt
+
+"""
+Parses environment variables to int, sets
+to default if they don't exist yet
+"""
+def environ_read(eVar):
+    if(eVar):
+        eVar = int(eVar)
+    else:
+        eVar = 0 # Set to default
+
+# Read Environment Vars safely
+dev = environ_read(os.environ.get('DEV'))
+demo = environ_read(os.environ.get('DEMO'))
 
 # Number Mapping:
 mapping = {
