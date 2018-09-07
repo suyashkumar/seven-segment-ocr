@@ -9,6 +9,8 @@ import os
 import time
 import warnings
 warnings.filterwarnings("ignore") # Filter matplotlib warnings
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 """

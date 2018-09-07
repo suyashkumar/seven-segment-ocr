@@ -18,15 +18,14 @@ def read_video_digits(videoPath, samplePeriod):
     video = cv2.VideoCapture(videoPath) # Open video
     success,image = video.read() # Get first frame
     selections=image_selection.getSelectionsFromImage(image)
-
-    fps = video.get(cv2.cv.CV_CAP_PROP_FPS) # Get FPS
-    frameInterval = int(round(fps * samplePeriod))
-    totalFrames = video.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT)
+    fps = video.get(cv2.CAP_PROP_FPS) # Get FPS 
+    frameInterval = int(round(float(fps) * float(samplePeriod)))
+    totalFrames = video.get(cv2.CAP_PROP_FRAME_COUNT)
 
     digitMatrix = [] # Holds list of dgits from each sample
 
     for frameNumber in xrange(0,int(round(totalFrames/frameInterval))):
-        video.set(cv2.cv.CV_CAP_PROP_POS_FRAMES, frameNumber*frameInterval) # Set frame to read next
+        video.set(cv2.CAP_PROP_POS_FRAMES, frameNumber*frameInterval) # Set frame to read next
         success,image = video.read() # Get frame
         digits = digit_reader.read_digits(image, selections) # Get digits
         digitMatrix.append(digits)
