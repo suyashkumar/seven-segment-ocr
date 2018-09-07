@@ -1,5 +1,8 @@
 # seven-segment-ocr
 A program and set of Python modules to parse digits from videos of seven segment displays. This program does not operate on a trained model--rather, it takes a universal approach by taking three line profiles to efficiently and effectively determine which digit is shown.
+
+:eyes: I'm actively revisiting this library after many years (when the core of this was written) to improve code quality, testing, features, architecture, and more as this starts to get organic traction. 
+
 ## Usage
 
 Simply supply a path to a video of a seven segment display and an interval to sample the digits at and an output file will be generated (by default out.csv) with the recognized digits at each sample interval. Before proceeding, the program first presents the first frame of the video and you must click and drag rectangular selections around the digits in the video and then press "d" when done or "r" to redraw rectangles. The program will then go though and recognize and parse the digits at each interval.
